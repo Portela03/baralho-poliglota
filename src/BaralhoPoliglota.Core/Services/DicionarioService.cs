@@ -53,21 +53,28 @@ public sealed class DicionarioService : IDicionarioService
 
         if (entrada.TryGetProperty("meanings", out var significados) && significados.ValueKind == JsonValueKind.Array)
         {
+            // Os sinônimos vêm só do primeiro significado: os dos demais costumam ser de outro sentido
+            // da palavra (ex.: "house" → "shop") e confundem quem está estudando.
+            var primeiroSignificado = true;
             foreach (var significado in significados.EnumerateArray())
             {
                 classe ??= significado.TextoOuNulo("partOfSpeech");
-                ColetarSinonimos(significado, sinonimos);
+                if (primeiroSignificado)
+                    ColetarSinonimos(significado, sinonimos);
 
-                if (!significado.TryGetProperty("definitions", out var definicoes) ||
-                    definicoes.ValueKind != JsonValueKind.Array)
-                    continue;
-
-                foreach (var d in definicoes.EnumerateArray())
+                if (significado.TryGetProperty("definitions", out var definicoes) &&
+                    definicoes.ValueKind == JsonValueKind.Array)
                 {
-                    definicao ??= d.TextoOuNulo("definition");
-                    exemplo ??= d.TextoOuNulo("example");
-                    ColetarSinonimos(d, sinonimos);
+                    foreach (var d in definicoes.EnumerateArray())
+                    {
+                        definicao ??= d.TextoOuNulo("definition");
+                        exemplo ??= d.TextoOuNulo("example");
+                        if (primeiroSignificado)
+                            ColetarSinonimos(d, sinonimos);
+                    }
                 }
+
+                primeiroSignificado = false;
             }
         }
 

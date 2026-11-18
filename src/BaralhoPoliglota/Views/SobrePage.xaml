@@ -7,7 +7,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="640">
-            <Label Text="🃏 Baralho Poliglota" Style="{StaticResource Headline}" HorizontalOptions="Start" />
+            <Label Text="Baralho Poliglota" Style="{StaticResource Headline}" HorizontalOptions="Start" />
             <Label Text="Aprenda vocabulário traduzindo palavras, guardando no seu baralho e jogando com cartas de verdade." />
 
             <Label Text="APIs utilizadas" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" />

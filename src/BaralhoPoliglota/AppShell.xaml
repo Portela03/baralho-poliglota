@@ -10,7 +10,7 @@
     <!-- Modo 1: Flyout (menu lateral) -->
     <Shell.FlyoutHeader>
         <Grid Padding="20" HeightRequest="110">
-            <Label Text="🃏 Baralho Poliglota" FontSize="22" FontAttributes="Bold" VerticalOptions="Center" />
+            <Label Text="Baralho Poliglota" FontSize="22" FontAttributes="Bold" VerticalOptions="Center" />
         </Grid>
     </Shell.FlyoutHeader>
 

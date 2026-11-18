@@ -40,7 +40,7 @@ public partial class TraduzirViewModel : BaseViewModel
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(TemResultado))]
-    [NotifyPropertyChangedFor(nameof(AlternativasTexto))]
+    [NotifyPropertyChangedFor(nameof(TemAlternativas))]
     private ResultadoTraducao? _resultado;
 
     [ObservableProperty]
@@ -54,8 +54,7 @@ public partial class TraduzirViewModel : BaseViewModel
     public bool TemResultado => Resultado is not null;
     public bool TemDefinicao => Definicao is not null;
 
-    public string? AlternativasTexto =>
-        Resultado is { Alternativas.Count: > 0 } r ? "Também: " + string.Join(", ", r.Alternativas) : null;
+    public bool TemAlternativas => Resultado is { Alternativas.Count: > 0 };
 
     public string? SinonimosTexto =>
         Definicao is { Sinonimos.Count: > 0 } d ? "Sinônimos: " + string.Join(", ", d.Sinonimos) : null;
@@ -77,6 +76,16 @@ public partial class TraduzirViewModel : BaseViewModel
         Resultado = null;
         Definicao = null;
         NotaDefinicao = null;
+    }
+
+    /// <summary>O MyMemory é colaborativo: permite ao usuário escolher a sugestão certa antes de guardar.</summary>
+    [RelayCommand]
+    private void EscolherTraducao(string traducao)
+    {
+        if (Resultado is null)
+            return;
+
+        Resultado = Resultado.ComPrincipal(traducao);
     }
 
     [RelayCommand]

@@ -45,7 +45,7 @@ Descartadas (verificadas em 18/11/2026): SpaceX API (fora do ar, HTTP 522) e RES
 
 | Tela | Conteúdo | Regras |
 |---|---|---|
-| Traduzir | Campo de palavra, pickers de idioma de origem/destino, botão Traduzir, resultado com alternativas e definição, botão "Guardar no baralho" | Idiomas: pt, en, es, fr, de, it. Origem ≠ destino. Último par escolhido é lembrado (`Preferences`) |
+| Traduzir | Campo de palavra, pickers de idioma de origem/destino, botão Traduzir, resultado com alternativas e definição, sugestões tocáveis (o MyMemory é colaborativo, então o usuário escolhe a tradução certa), botão "Guardar no baralho" | Idiomas: pt, en, es, fr, de, it. Origem ≠ destino. Último par escolhido é lembrado (`Preferences`) |
 | Meu Baralho | Lista de palavras guardadas com busca; toque abre o detalhe; botões de favoritar (★) e excluir (🗑, com confirmação) | Não permite duplicata (mesmo texto + mesmo par de idiomas) |
 | Detalhe | Palavra, tradução, idiomas, definição, exemplo, fonética, "Ouvir pronúncia", favoritar, remover | Áudio abre o link da pronúncia no navegador/player do sistema |
 | Jogar | Mostra a carta sacada e a pergunta; resposta por múltipla escolha ou digitada | Ver seção 4 |
