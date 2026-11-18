@@ -1,4 +1,5 @@
-﻿using BaralhoPoliglota.Core.Persistencia;
+using BaralhoPoliglota.Core.Estudo;
+using BaralhoPoliglota.Core.Persistencia;
 using BaralhoPoliglota.Core.Services;
 using BaralhoPoliglota.ViewModels;
 using BaralhoPoliglota.Views;
@@ -40,27 +41,29 @@ public static class MauiProgram
 
 		servicos.AddSingleton<ITraducaoService, TraducaoService>();
 		servicos.AddSingleton<IDicionarioService, DicionarioService>();
-		servicos.AddSingleton<IBaralhoService, BaralhoService>();
+		servicos.AddSingleton<IFeriadoService, FeriadoService>();
+		servicos.AddSingleton<ImportadorDeFeriados>();
 
 		servicos.AddSingleton<IPalavraRepository>(_ => new PalavraRepository(FileSystem.AppDataDirectory));
-		servicos.AddSingleton<IPartidaRepository>(_ => new PartidaRepository(FileSystem.AppDataDirectory));
 	}
 
 	private static void RegistrarTelas(IServiceCollection servicos)
 	{
 		servicos.AddTransient<TraduzirViewModel>();
 		servicos.AddTransient<MeuBaralhoViewModel>();
-		servicos.AddSingleton<JogarViewModel>();
+		servicos.AddTransient<EstudarViewModel>();
 		servicos.AddTransient<DetalhePalavraViewModel>();
 		servicos.AddTransient<ResultadoViewModel>();
-		servicos.AddTransient<PlacarViewModel>();
+		servicos.AddTransient<ProgressoViewModel>();
+		servicos.AddTransient<FeriadosViewModel>();
 
 		servicos.AddTransient<TraduzirPage>();
 		servicos.AddTransient<MeuBaralhoPage>();
-		servicos.AddSingleton<JogarPage>();
+		servicos.AddTransient<EstudarPage>();
 		servicos.AddTransient<DetalhePalavraPage>();
 		servicos.AddTransient<ResultadoPage>();
-		servicos.AddTransient<PlacarPage>();
+		servicos.AddTransient<ProgressoPage>();
+		servicos.AddTransient<FeriadosPage>();
 		servicos.AddTransient<SobrePage>();
 	}
 }

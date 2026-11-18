@@ -34,7 +34,8 @@
                         <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4">
                             <VerticalStackLayout Spacing="2">
                                 <Label Text="{Binding Descricao}" FontAttributes="Bold" />
-                                <Label Text="{Binding ParDeIdiomas}" FontSize="12" />
+                                <Label Text="{Binding ParDeIdiomas, StringFormat='{0}'}" FontSize="12" />
+                                <Label Text="{Binding StatusEstudo}" FontSize="12" TextColor="#43A047" />
                             </VerticalStackLayout>
 
                             <Button

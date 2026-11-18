@@ -15,10 +15,10 @@ public interface IDicionarioService
     Task<DefinicaoDicionario?> BuscarAsync(string palavraEmIngles, CancellationToken ct = default);
 }
 
-public interface IBaralhoService
+public interface IFeriadoService
 {
-    Task<BaralhoInfo> NovoBaralhoAsync(CancellationToken ct = default);
-    Task<Carta> SacarAsync(string deckId, CancellationToken ct = default);
+    /// <summary>Feriados nacionais do ano (BrasilAPI).</summary>
+    Task<IReadOnlyList<Feriado>> ListarAsync(int ano, CancellationToken ct = default);
 }
 
 public interface IPalavraRepository
@@ -31,10 +31,4 @@ public interface IPalavraRepository
 
     Task AtualizarAsync(PalavraSalva palavra);
     Task RemoverAsync(Guid id);
-}
-
-public interface IPartidaRepository
-{
-    Task<IReadOnlyList<ResultadoPartida>> ListarAsync();
-    Task AdicionarAsync(ResultadoPartida resultado);
 }
