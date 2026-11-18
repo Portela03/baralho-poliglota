@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BaralhoPoliglota.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:BaralhoPoliglota.Views"
+    Shell.FlyoutBehavior="Flyout"
+    Title="Baralho Poliglota">
+
+    <!-- Modo 1: Flyout (menu lateral) -->
+    <Shell.FlyoutHeader>
+        <Grid Padding="20" HeightRequest="110">
+            <Label Text="🃏 Baralho Poliglota" FontSize="22" FontAttributes="Bold" VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Modo 2: TabBar (os três ShellContent viram abas) -->
+    <FlyoutItem Title="Baralho" FlyoutDisplayOptions="AsSingleItem">
+        <ShellContent Title="Traduzir" Route="traduzir" ContentTemplate="{DataTemplate views:TraduzirPage}" />
+        <ShellContent Title="Meu Baralho" Route="baralho" ContentTemplate="{DataTemplate views:MeuBaralhoPage}" />
+        <ShellContent Title="Jogar" Route="jogar" ContentTemplate="{DataTemplate views:JogarPage}" />
+    </FlyoutItem>
+
+    <ShellContent Title="Placar" Route="placar" ContentTemplate="{DataTemplate views:PlacarPage}" />
+    <ShellContent Title="Sobre" Route="sobre" ContentTemplate="{DataTemplate views:SobrePage}" />
+
+</Shell>

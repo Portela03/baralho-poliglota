@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BaralhoPoliglota.Views.TraduzirPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:BaralhoPoliglota.ViewModels"
+    x:DataType="vm:TraduzirViewModel"
+    Title="Traduzir">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="640">
+
+            <Label Text="Traduza uma palavra" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" />
+
+            <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+                <Picker
+                    Title="De"
+                    ItemsSource="{Binding Idiomas}"
+                    SelectedItem="{Binding IdiomaOrigem}" />
+                <Button
+                    Grid.Column="1"
+                    Text="⇄"
+                    Command="{Binding TrocarIdiomasCommand}"
+                    SemanticProperties.Description="Trocar idiomas" />
+                <Picker
+                    Grid.Column="2"
+                    Title="Para"
+                    ItemsSource="{Binding Idiomas}"
+                    SelectedItem="{Binding IdiomaDestino}" />
+            </Grid>
+
+            <Entry
+                Placeholder="Digite uma palavra"
+                Text="{Binding Texto}"
+                ReturnCommand="{Binding TraduzirCommand}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Button
+                Text="Traduzir"
+                Command="{Binding TraduzirCommand}"
+                IsEnabled="{Binding NaoOcupado}" />
+
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" />
+
+            <Label Text="{Binding Mensagem}" TextColor="#C62828" IsVisible="{Binding TemMensagem}" />
+            <Label Text="{Binding Aviso}" TextColor="#2E7D32" IsVisible="{Binding TemAviso}" />
+
+            <Border IsVisible="{Binding TemResultado}" Padding="16" StrokeShape="RoundRectangle 12">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Tradução" FontSize="12" TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+                    <Label Text="{Binding Resultado.Traducao}" FontSize="28" FontAttributes="Bold" />
+                    <Label Text="{Binding AlternativasTexto}" />
+
+                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+
+                    <VerticalStackLayout Spacing="4" IsVisible="{Binding TemDefinicao}">
+                        <Label Text="{Binding Definicao.Palavra, StringFormat='Dicionário · {0}'}" FontSize="12" />
+                        <Label Text="{Binding Definicao.ClasseGramatical}" FontAttributes="Italic" />
+                        <Label Text="{Binding Definicao.Definicao}" />
+                        <Label Text="{Binding Definicao.Exemplo, StringFormat='Ex.: {0}'}" FontAttributes="Italic" />
+                        <Label Text="{Binding Definicao.Fonetica}" />
+                        <Label Text="{Binding SinonimosTexto}" />
+                    </VerticalStackLayout>
+                    <Label Text="{Binding NotaDefinicao}" FontSize="12" IsVisible="{Binding TemResultado}" />
+
+                    <Button
+                        Text="Guardar no baralho"
+                        Command="{Binding GuardarCommand}"
+                        IsEnabled="{Binding NaoOcupado}" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

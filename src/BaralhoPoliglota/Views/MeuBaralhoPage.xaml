@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BaralhoPoliglota.Views.MeuBaralhoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core="clr-namespace:BaralhoPoliglota.Core.Models;assembly=BaralhoPoliglota.Core"
+    xmlns:vm="clr-namespace:BaralhoPoliglota.ViewModels"
+    x:DataType="vm:MeuBaralhoViewModel"
+    Title="Meu Baralho">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16" RowSpacing="8">
+        <SearchBar Placeholder="Buscar palavra ou tradução" Text="{Binding Busca}" />
+
+        <Label Grid.Row="1" Text="{Binding Resumo}" FontSize="12" />
+
+        <CollectionView Grid.Row="2" ItemsSource="{Binding Palavras}" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <Label
+                    Text="Seu baralho está vazio. Traduza uma palavra e toque em “Guardar no baralho”."
+                    HorizontalTextAlignment="Center"
+                    VerticalOptions="Center"
+                    Margin="24" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="core:PalavraSalva">
+                    <Border Padding="12" Margin="0,4" StrokeShape="RoundRectangle 10">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MeuBaralhoViewModel}}, Path=AbrirCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="4">
+                            <VerticalStackLayout Spacing="2">
+                                <Label Text="{Binding Descricao}" FontAttributes="Bold" />
+                                <Label Text="{Binding ParDeIdiomas}" FontSize="12" />
+                            </VerticalStackLayout>
+
+                            <Button
+                                Grid.Column="1"
+                                Text="★"
+                                BackgroundColor="Transparent"
+                                TextColor="#F9A825"
+                                SemanticProperties.Description="Favoritar"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MeuBaralhoViewModel}}, Path=FavoritarCommand}"
+                                CommandParameter="{Binding .}" />
+                            <Button
+                                Grid.Column="2"
+                                Text="🗑"
+                                BackgroundColor="Transparent"
+                                SemanticProperties.Description="Excluir"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MeuBaralhoViewModel}}, Path=ExcluirCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
