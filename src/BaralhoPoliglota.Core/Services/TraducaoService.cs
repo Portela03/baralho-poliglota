@@ -8,7 +8,8 @@ namespace BaralhoPoliglota.Core.Services;
 public sealed class TraducaoService : ITraducaoService
 {
     public const string UrlBase = "https://api.mymemory.translated.net/get";
-    private const int MaximoDeAlternativas = 3;
+    // O MyMemory é colaborativo: a primeira sugestão nem sempre é a melhor, então mostramos várias.
+    private const int MaximoDeAlternativas = 4;
 
     private readonly HttpClient _http;
 

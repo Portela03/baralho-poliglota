@@ -12,7 +12,7 @@
 
             <!-- Tela inicial -->
             <VerticalStackLayout Spacing="16" IsVisible="{Binding NaoJogando}">
-                <Label Text="🃏 Baralho Poliglota" Style="{StaticResource Headline}" HorizontalOptions="Center" />
+                <Label Text="Baralho Poliglota" Style="{StaticResource Headline}" HorizontalOptions="Center" />
                 <Label Text="{Binding TextoIntro}" HorizontalTextAlignment="Center" />
 
                 <Border Padding="14" StrokeShape="RoundRectangle 10">

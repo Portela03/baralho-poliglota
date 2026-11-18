@@ -113,6 +113,21 @@ public class DicionarioServiceTests
     }
 
     [Fact]
+    public async Task Sinonimos_vem_so_do_primeiro_significado()
+    {
+        var (http, _) = HandlerFalso.Json("""
+            [{"word":"house",
+              "meanings":[
+                {"partOfSpeech":"noun","definitions":[{"definition":"A building.","synonyms":["home"]}],"synonyms":["dwelling"]},
+                {"partOfSpeech":"verb","definitions":[{"definition":"To shelter.","synonyms":["shop"]}],"synonyms":["lodge"]}]}]
+            """);
+
+        var definicao = await new DicionarioService(http).BuscarAsync("house");
+
+        Assert.Equal(["dwelling", "home"], definicao!.Sinonimos);
+    }
+
+    [Fact]
     public async Task Palavra_inexistente_404_devolve_nulo_sem_erro()
     {
         var (http, _) = HandlerFalso.Json("""{"title":"No Definitions Found"}""", HttpStatusCode.NotFound);

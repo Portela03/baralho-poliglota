@@ -5,6 +5,10 @@ cartas de verdade. Projeto da atividade de APIs (mín. 2 APIs externas, 3 modos 
 
 Especificação completa: [SPEC.md](SPEC.md).
 
+![Telas do app](docs/screenshots/visao-geral.png)
+
+Telas individuais em [docs/screenshots](docs/screenshots).
+
 ## APIs
 
 | API | Uso |
@@ -51,5 +55,7 @@ dotnet build src/BaralhoPoliglota -f net10.0-android -t:Run
 
 ## Observações
 
+- O MyMemory é colaborativo: a primeira sugestão pode estar errada (ex.: `sun → eno`). Por isso o app
+  mostra outras sugestões e deixa você tocar na certa antes de guardar.
 - A cota gratuita do MyMemory é limitada por dia; quando acaba, o app avisa.
 - O dicionário só tem palavras em inglês: as definições aparecem quando um dos idiomas é o inglês.
