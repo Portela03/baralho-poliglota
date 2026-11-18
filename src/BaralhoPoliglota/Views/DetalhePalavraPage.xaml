@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BaralhoPoliglota.Views.DetalhePalavraPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:BaralhoPoliglota.ViewModels"
+    x:DataType="vm:DetalhePalavraViewModel"
+    Title="Palavra">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12" MaximumWidthRequest="640">
+
+            <Label Text="{Binding Mensagem}" TextColor="#C62828" IsVisible="{Binding TemMensagem}" />
+
+            <Label Text="{Binding Palavra.ParDeIdiomas}" FontSize="12" />
+            <Label Text="{Binding Palavra.Texto}" Style="{StaticResource Headline}" HorizontalOptions="Start" />
+            <Label Text="{Binding Palavra.Traducao}" FontSize="26" FontAttributes="Bold" />
+            <Label Text="{Binding AlternativasTexto}" />
+
+            <Border Padding="14" StrokeShape="RoundRectangle 10" IsVisible="{Binding TemDefinicao}">
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="{Binding TituloDefinicao}" FontAttributes="Bold" />
+                    <Label Text="{Binding Palavra.ClasseGramatical}" FontAttributes="Italic" />
+                    <Label Text="{Binding Palavra.Definicao}" />
+                    <Label Text="{Binding Palavra.Exemplo, StringFormat='Ex.: {0}'}" FontAttributes="Italic"
+                           IsVisible="{Binding TemExemplo}" />
+                    <Label Text="{Binding Palavra.Fonetica}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="🔊 Ouvir pronúncia" Command="{Binding OuvirCommand}" IsVisible="{Binding TemAudio}" />
+            <Button Text="{Binding TextoFavorito}" Command="{Binding FavoritarCommand}" />
+            <Button Text="Excluir do baralho" Command="{Binding RemoverCommand}" BackgroundColor="#C62828" TextColor="White" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
