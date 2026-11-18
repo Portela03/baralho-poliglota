@@ -1,19 +1,17 @@
-# 🃏 Baralho Poliglota
+# Baralho Poliglota
 
-App **.NET MAUI** para aprender vocabulário: traduza palavras, guarde no seu baralho e jogue com
-cartas de verdade. Projeto da atividade de APIs (mín. 2 APIs externas, 3 modos de navegação, POO).
+App **.NET MAUI** para aprender vocabulário: traduza palavras, guarde no seu baralho e revise com
+repetição espaçada, como no Anki. Projeto da atividade de APIs (mín. 2 APIs externas, 3 modos de navegação, POO).
 
 Especificação completa: [SPEC.md](SPEC.md).
 
-![Telas do app](docs/screenshots/visao-geral.png)
-
-Telas individuais em [docs/screenshots](docs/screenshots).
+Capturas das telas de tradução e baralho em [docs/screenshots](docs/screenshots).
 
 ## APIs
 
 | API | Uso |
 |---|---|
-| [Deck of Cards API](https://deckofcardsapi.com) | Baralho e cartas do jogo |
+| [BrasilAPI](https://brasilapi.com.br) | Feriados nacionais, que viram um baralho pronto |
 | [MyMemory Translation](https://mymemory.translated.net/doc/spec.php) | Tradução de palavras |
 | [Free Dictionary API](https://dictionaryapi.dev) | Definição, fonética e áudio (inglês) |
 
@@ -21,12 +19,12 @@ Nenhuma exige chave de API.
 
 ## Navegação
 
-Flyout (menu lateral) · TabBar (Traduzir, Meu Baralho, Jogar) · Pilha (detalhe da palavra e resultado).
+Flyout (menu lateral) · TabBar (Traduzir, Meu Baralho, Estudar) · Pilha (detalhe da palavra e fim da sessão).
 
 ## Estrutura
 
 ```
-src/BaralhoPoliglota.Core   Modelos, serviços de API, repositórios e regras do jogo (net10.0)
+src/BaralhoPoliglota.Core   Modelos, serviços de API, repositório, agendador e sessão de estudo (net10.0)
 src/BaralhoPoliglota        App MAUI: Views (XAML), ViewModels (MVVM), Shell, DI
 tests/BaralhoPoliglota.Tests  Testes xUnit do Core
 ```
@@ -46,12 +44,15 @@ dotnet run --project src/BaralhoPoliglota -f net10.0-windows10.0.19041.0
 dotnet build src/BaralhoPoliglota -f net10.0-android -t:Run
 ```
 
-## Como jogar
+## Como estudar
 
-1. Na aba **Traduzir**, traduza palavras e toque em **Guardar no baralho** (mínimo de 4).
-2. Na aba **Jogar**, inicie uma partida de 10 rodadas.
-3. Cartas vermelhas (♥ ♦) → múltipla escolha. Cartas pretas (♠ ♣) → digite a tradução.
-4. O valor da carta dá os pontos (Ás = 11, figuras = 10) e acertos seguidos dão bônus de até +5.
+1. Na aba **Traduzir**, traduza palavras e toque em **Guardar no baralho**. Ou abra **Feriados do Brasil**
+   no menu lateral para criar um baralho pronto a partir da BrasilAPI.
+2. Na aba **Estudar**, toque em *Estudar agora*. Você vê a frente da carta, pensa na resposta e toca em
+   **Mostrar resposta**.
+3. Avalie com **Errei / Difícil / Bom / Fácil**. Cada botão mostra quando a carta volta (ex.: 1 dia, 3 dias,
+   2 meses). Cartas erradas voltam ao fim da sessão.
+4. O menu **Progresso** mostra cartas novas, para hoje, aprendendo, maduras (21+ dias) e taxa de acerto.
 
 ## Observações
 

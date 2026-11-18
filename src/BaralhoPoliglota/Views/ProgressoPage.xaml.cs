@@ -2,11 +2,11 @@ using BaralhoPoliglota.ViewModels;
 
 namespace BaralhoPoliglota.Views;
 
-public partial class PlacarPage : ContentPage
+public partial class ProgressoPage : ContentPage
 {
-    private readonly PlacarViewModel _viewModel;
+    private readonly ProgressoViewModel _viewModel;
 
-    public PlacarPage(PlacarViewModel viewModel)
+    public ProgressoPage(ProgressoViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;

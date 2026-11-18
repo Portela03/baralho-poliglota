@@ -76,16 +76,4 @@ public sealed class PersistenciaTests : IDisposable
 
         Assert.Equal(20, (await repo.ListarAsync()).Count);
     }
-
-    [Fact]
-    public async Task Partidas_ficam_em_ordem_da_mais_recente()
-    {
-        var repo = new PartidaRepository(_pasta);
-        await repo.AdicionarAsync(new ResultadoPartida { Pontos = 10, Data = new DateTime(2026, 1, 1) });
-        await repo.AdicionarAsync(new ResultadoPartida { Pontos = 99, Data = new DateTime(2026, 6, 1) });
-
-        var lidas = await repo.ListarAsync();
-
-        Assert.Equal([99, 10], lidas.Select(p => p.Pontos));
-    }
 }

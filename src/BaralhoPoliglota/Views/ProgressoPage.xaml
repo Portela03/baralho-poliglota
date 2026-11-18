@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BaralhoPoliglota.Views.ProgressoPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:BaralhoPoliglota.ViewModels"
+    x:DataType="vm:ProgressoViewModel"
+    Title="Progresso">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12" MaximumWidthRequest="640">
+            <Label Text="Seu baralho" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" />
+
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="10">
+                <Border Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding TotalTexto}" FontSize="28" FontAttributes="Bold" />
+                        <Label Text="Cartas no total" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding ParaHojeTexto}" FontSize="28" FontAttributes="Bold" TextColor="#43A047" />
+                        <Label Text="Para revisar hoje" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding NovasTexto}" FontSize="28" FontAttributes="Bold" TextColor="#1E88E5" />
+                        <Label Text="Novas" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding AprendendoTexto}" FontSize="28" FontAttributes="Bold" TextColor="#EF6C00" />
+                        <Label Text="Aprendendo" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="2" Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding MaduraTexto}" FontSize="28" FontAttributes="Bold" TextColor="#8E24AA" />
+                        <Label Text="Maduras (21+ dias)" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding RevisoesTexto}" FontSize="28" FontAttributes="Bold" />
+                        <Label Text="Revisões feitas" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Row="3" Grid.ColumnSpan="2" Padding="14" StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout>
+                        <Label Text="{Binding TaxaTexto}" FontSize="28" FontAttributes="Bold" />
+                        <Label Text="Taxa de acerto" FontSize="12" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

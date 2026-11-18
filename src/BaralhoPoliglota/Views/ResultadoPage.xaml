@@ -5,19 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:BaralhoPoliglota.ViewModels"
     x:DataType="vm:ResultadoViewModel"
-    Title="Resultado">
+    Title="Sessão concluída">
 
     <VerticalStackLayout Padding="24" Spacing="16" MaximumWidthRequest="480" VerticalOptions="Center">
-        <Label Text="{Binding Titulo}" Style="{StaticResource Headline}" HorizontalOptions="Center" />
+        <Label Text="Sessão concluída!" Style="{StaticResource Headline}" HorizontalOptions="Center" />
 
-        <Label Text="{Binding Pontos}" FontSize="72" FontAttributes="Bold" HorizontalOptions="Center" />
-        <Label Text="pontos" HorizontalOptions="Center" />
+        <Label Text="{Binding Revisadas}" FontSize="72" FontAttributes="Bold" HorizontalOptions="Center" />
+        <Label Text="avaliações feitas" HorizontalOptions="Center" />
 
         <Label Text="{Binding Resumo}" FontSize="18" HorizontalOptions="Center" />
-        <Label Text="{Binding MelhorSequencia, StringFormat='Melhor sequência: {0}'}" HorizontalOptions="Center" />
+        <Label Text="{Binding Erros, StringFormat='Cartas que voltaram por erro: {0}'}" HorizontalOptions="Center" />
+        <Label Text="{Binding Mensagem2}" FontSize="12" HorizontalTextAlignment="Center" />
 
-        <Button Text="Jogar de novo" Command="{Binding JogarNovamenteCommand}" />
-        <Button Text="Voltar" Command="{Binding VoltarCommand}" BackgroundColor="Transparent"
-                TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray300}}" />
+        <Button Text="Voltar" Command="{Binding VoltarCommand}" />
     </VerticalStackLayout>
 </ContentPage>

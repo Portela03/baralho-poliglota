@@ -18,10 +18,11 @@
     <FlyoutItem Title="Baralho" FlyoutDisplayOptions="AsSingleItem">
         <ShellContent Title="Traduzir" Route="traduzir" ContentTemplate="{DataTemplate views:TraduzirPage}" />
         <ShellContent Title="Meu Baralho" Route="baralho" ContentTemplate="{DataTemplate views:MeuBaralhoPage}" />
-        <ShellContent Title="Jogar" Route="jogar" ContentTemplate="{DataTemplate views:JogarPage}" />
+        <ShellContent Title="Estudar" Route="estudar" ContentTemplate="{DataTemplate views:EstudarPage}" />
     </FlyoutItem>
 
-    <ShellContent Title="Placar" Route="placar" ContentTemplate="{DataTemplate views:PlacarPage}" />
+    <ShellContent Title="Feriados do Brasil" Route="feriados" ContentTemplate="{DataTemplate views:FeriadosPage}" />
+    <ShellContent Title="Progresso" Route="progresso" ContentTemplate="{DataTemplate views:ProgressoPage}" />
     <ShellContent Title="Sobre" Route="sobre" ContentTemplate="{DataTemplate views:SobrePage}" />
 
 </Shell>

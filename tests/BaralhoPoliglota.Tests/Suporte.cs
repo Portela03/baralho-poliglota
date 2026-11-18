@@ -32,29 +32,8 @@ internal sealed class HandlerFalso : HttpMessageHandler
     public static HttpClient Falha(Exception ex) => new(new HandlerFalso(_ => throw ex));
 }
 
-internal sealed class BaralhoFalso : IBaralhoService
-{
-    private readonly Queue<Carta> _cartas;
-
-    public BaralhoFalso(params Carta[] cartas) => _cartas = new Queue<Carta>(cartas);
-
-    public int BaralhosCriados { get; private set; }
-
-    public Task<BaralhoInfo> NovoBaralhoAsync(CancellationToken ct = default)
-    {
-        BaralhosCriados++;
-        return Task.FromResult(new BaralhoInfo("deck-teste", 52));
-    }
-
-    public Task<Carta> SacarAsync(string deckId, CancellationToken ct = default) =>
-        Task.FromResult(_cartas.Dequeue());
-}
-
 internal static class Fabrica
 {
-    public static Carta Carta(string valor, string naipe) =>
-        new($"{valor}{naipe[0]}", valor, naipe, "https://exemplo.test/carta.png");
-
     public static PalavraSalva Palavra(string texto, string traducao, params string[] alternativas) =>
         PalavraSalva.Criar(texto, traducao, "en", "pt", alternativas);
 

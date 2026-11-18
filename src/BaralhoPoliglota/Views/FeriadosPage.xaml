@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BaralhoPoliglota.Views.FeriadosPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:BaralhoPoliglota.ViewModels"
+    x:DataType="vm:FeriadosViewModel"
+    Title="Feriados do Brasil">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="14" MaximumWidthRequest="640">
+            <Label Text="Baralho pronto: feriados" Style="{StaticResource SubHeadline}" HorizontalOptions="Start" />
+            <Label Text="O app busca os feriados nacionais na BrasilAPI e cria uma carta para cada um, com o nome traduzido para o idioma que você estuda." />
+
+            <Picker Title="Idioma" ItemsSource="{Binding Idiomas}" SelectedItem="{Binding Idioma}" />
+            <Entry Placeholder="Ano" Keyboard="Numeric" Text="{Binding AnoTexto}" />
+
+            <Button Text="Criar cartas" Command="{Binding CriarCommand}" IsEnabled="{Binding NaoOcupado}" />
+
+            <ActivityIndicator IsRunning="{Binding Ocupado}" IsVisible="{Binding Ocupado}" />
+            <ProgressBar Progress="{Binding Andamento}" IsVisible="{Binding Ocupado}" />
+            <Label Text="{Binding AndamentoTexto}" FontSize="12" />
+
+            <Label Text="{Binding Mensagem}" TextColor="#C62828" IsVisible="{Binding TemMensagem}" />
+            <Label Text="{Binding Aviso}" TextColor="#EF6C00" IsVisible="{Binding TemAviso}" />
+            <Label Text="{Binding ResultadoTexto}" TextColor="#2E7D32" FontAttributes="Bold" />
+            <Label Text="As cartas novas aparecem na aba Estudar." FontSize="12" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

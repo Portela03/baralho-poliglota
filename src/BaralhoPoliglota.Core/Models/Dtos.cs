@@ -30,19 +30,5 @@ public sealed record DefinicaoDicionario(
     string? UrlAudio,
     IReadOnlyList<string> Sinonimos);
 
-/// <summary>Baralho criado na Deck of Cards API.</summary>
-public sealed record BaralhoInfo(string DeckId, int Restantes);
-
-/// <summary>Resultado de uma partida, guardado no placar.</summary>
-public sealed class ResultadoPartida
-{
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public DateTime Data { get; set; } = DateTime.Now;
-    public int Pontos { get; set; }
-    public int Acertos { get; set; }
-    public int TotalRodadas { get; set; }
-    public int MelhorSequencia { get; set; }
-
-    public double TaxaDeAcerto => TotalRodadas == 0 ? 0 : (double)Acertos / TotalRodadas;
-    public string Resumo => $"{Pontos} pts · {Acertos}/{TotalRodadas} acertos";
-}
+/// <summary>Feriado nacional devolvido pela BrasilAPI.</summary>
+public sealed record Feriado(DateOnly Data, string Nome, string DiaDaSemana);

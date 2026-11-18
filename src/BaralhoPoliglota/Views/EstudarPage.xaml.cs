@@ -2,11 +2,11 @@ using BaralhoPoliglota.ViewModels;
 
 namespace BaralhoPoliglota.Views;
 
-public partial class JogarPage : ContentPage
+public partial class EstudarPage : ContentPage
 {
-    private readonly JogarViewModel _viewModel;
+    private readonly EstudarViewModel _viewModel;
 
-    public JogarPage(JogarViewModel viewModel)
+    public EstudarPage(EstudarViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = _viewModel = viewModel;
