@@ -272,6 +272,20 @@ public sealed class ImportadorDeFeriadosTests : IDisposable
     }
 
     [Fact]
+    public async Task Feriado_da_tabela_usa_a_traducao_fixa_e_nao_chama_o_servico()
+    {
+        var repo = new PalavraRepository(_pasta);
+        var importador = new ImportadorDeFeriados(
+            new FeriadosFalsos(new Feriado(new DateOnly(2026, 12, 25), "Natal", "sexta-feira")),
+            new TraducaoFalsa(_ => "allowance"), repo);
+
+        var resultado = await importador.ImportarAsync(2026, "en");
+
+        Assert.Equal(new ResultadoImportacao(1, 0, 0), resultado);
+        Assert.Equal("Christmas", (await repo.ListarAsync()).Single().Texto);
+    }
+
+    [Fact]
     public async Task Importar_de_novo_nao_duplica()
     {
         var repo = new PalavraRepository(_pasta);
@@ -288,8 +302,14 @@ public sealed class ImportadorDeFeriadosTests : IDisposable
     public async Task Falha_numa_traducao_nao_derruba_as_outras()
     {
         var repo = new PalavraRepository(_pasta);
+        // Nomes fora da tabela fixa, para exercitar o caminho de reserva (MyMemory).
+        Feriado[] foraDaTabela =
+        [
+            new(new DateOnly(2026, 3, 1), "Feriado Alfa", "domingo"),
+            new(new DateOnly(2026, 3, 2), "Feriado Beta", "segunda-feira"),
+        ];
         var importador = new ImportadorDeFeriados(
-            new FeriadosFalsos(Lista), new TraducaoFalsa(t => t == "Carnaval" ? null : "Independence Day"), repo);
+            new FeriadosFalsos(foraDaTabela), new TraducaoFalsa(t => t == "Feriado Alfa" ? null : "Independence Day"), repo);
         var passos = new List<(int, int)>();
 
         var resultado = await importador.ImportarAsync(2026, "en", new Progress<(int, int)>(passos.Add));

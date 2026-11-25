@@ -9,7 +9,7 @@ public sealed record ResultadoImportacao(int Adicionadas, int JaExistiam, int Fa
 
 /// <summary>
 /// Monta o baralho "Feriados do Brasil": busca os feriados na BrasilAPI e traduz o nome de cada
-/// um (MyMemory) para o idioma estudado. A frente da carta fica no idioma estudado e o verso em português.
+/// um para o idioma estudado (tabela fixa; MyMemory só para nomes fora da tabela). A frente da carta fica no idioma estudado e o verso em português.
 /// </summary>
 public sealed class ImportadorDeFeriados
 {
@@ -44,7 +44,19 @@ public sealed class ImportadorDeFeriados
             ct.ThrowIfCancellationRequested();
             try
             {
-                var traducao = await _traducao.TraduzirAsync(feriado.Nome, "pt", idioma, ct);
+                // Tabela fixa primeiro (o MyMemory erra nomes curtos, ex.: "Natal" → "allowance").
+                var fixa = TraducoesDeFeriados.Buscar(feriado.Nome, idioma);
+                ResultadoTraducao traducao;
+                if (fixa is not null)
+                {
+                    traducao = new ResultadoTraducao(fixa, []);
+                }
+                else
+                {
+                    // Feriado fora da tabela: cai no MyMemory, usando a sugestão melhor pontuada.
+                    traducao = await _traducao.TraduzirAsync(feriado.Nome, "pt", idioma, ct);
+                    traducao = traducao.ComPrincipal(traducao.MelhorPontuada);
+                }
 
                 var carta = PalavraSalva.Criar(traducao.Traducao, feriado.Nome, idioma, "pt", traducao.Alternativas);
                 carta.Exemplo = $"Feriado nacional: {feriado.Data.ToString("d 'de' MMMM", Pt)} ({feriado.DiaDaSemana})";

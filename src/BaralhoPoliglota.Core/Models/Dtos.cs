@@ -1,7 +1,8 @@
 namespace BaralhoPoliglota.Core.Models;
 
 /// <summary>Resultado de uma tradução (MyMemory).</summary>
-public sealed record ResultadoTraducao(string Traducao, IReadOnlyList<string> Alternativas)
+public sealed record ResultadoTraducao(
+    string Traducao, IReadOnlyList<string> Alternativas, string? MelhorPontuada = null)
 {
     /// <summary>
     /// Torna <paramref name="escolhida"/> a tradução principal (a antiga principal vira alternativa).
